@@ -15,17 +15,21 @@
 
 Key functionalities of the project:
 
-* Monthly EMI calculation using standard mortgage formula 
-* Full amortization schedule with principal, interest, and balance tracking 
+* Monthly EMI calculation using the standard mortgage formula
+* Full amortization schedule with principal, interest, and balance tracking
+* Support for **extra monthly payments** to accelerate loan payoff
+* Support for **lump-sum prepayments** at a chosen month
+* Automatic schedule shortening when loan is paid off early
 * Option to display only selected months of the schedule
-* Text-based visualization of loan balance over time
+* Terminal-based visualization of loan balance over time
 * Payment breakdown chart showing principal vs interest proportions
-* Modular architecture with separated components:
+* Modular architecture separating:
 
   * Mortgage model
   * Schedule generator
   * Table renderer
   * Chart visualizer
+  * CLI controller
 * Handles zero-interest loans correctly
 * Clean CLI interaction with input validation
 
@@ -72,26 +76,39 @@ Annual Interest Rate (%):
 Years:
 ```
 
-### 2. Program output
+### 2. (If enabled in your version) provide repayment strategy
+
+```
+Extra monthly payment:
+Lump-sum payment amount:
+Lump-sum payment month:
+```
+
+These values allow simulation of early repayment scenarios.
+
+### 3. Program output
 
 The application will display:
 
 * Monthly payment amount
 * Total number of payments
 * Total interest paid
-* Amortization schedule (first few or all months)
+* Amortization schedule
 * Loan balance timeline chart
 * Payment breakdown chart
 
-### 3. Example flow
+### 4. Example flow
 
 ```
 Loan Amount: 500000
 Annual Interest Rate (%): 7.5
 Years: 20
+Extra monthly payment: 2000
+Lump-sum payment: 50000
+Lump-sum month: 24
 ```
 
-The program calculates EMI, prints the schedule, and shows visual charts in the terminal.
+The program recalculates the schedule and shows how the loan closes earlier.
 
 ---
 
@@ -101,13 +118,14 @@ Technologies used in this project:
 
 * Python 3
 * Standard library only
-* Dataclasses for financial model structure 
+* Dataclasses for financial modeling
 * Modular design:
 
-  * Schedule generator module 
-  * Table formatting module 
-  * Chart rendering module 
-  * CLI controller module 
+  * Mortgage model module
+  * Amortization generator module
+  * Table formatting module
+  * Chart rendering module
+  * CLI controller module
 
 ---
 
@@ -123,12 +141,12 @@ python main.py
 
 Then verify:
 
-* EMI matches expected financial calculations
-* Schedule balance decreases to zero
-* Interest totals are correct
-* Display limit works correctly
+* EMI calculation matches expected values
+* Extra monthly payments reduce balance faster
+* Lump-sum payments shorten the loan term
+* Schedule stops when balance reaches zero
+* Interest totals adjust correctly
 * Charts render proportionally
-* Zero-interest loans divide evenly
 
 ---
 
@@ -143,7 +161,7 @@ If you'd like to improve this project:
 3. Commit your changes
 4. Open a pull request
 
-For larger changes, please open an issue first to discuss the proposal.
+For major feature changes, please open an issue first to discuss the proposal.
 
 ---
 
