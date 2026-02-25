@@ -15,23 +15,44 @@
 
 Key functionalities of the project:
 
-* Monthly EMI calculation using the standard mortgage formula
-* Full amortization schedule with principal, interest, and balance tracking
-* Support for **extra monthly payments** to accelerate loan payoff
-* Support for **lump-sum prepayments** at a chosen month
-* Automatic schedule shortening when loan is paid off early
-* Option to display only selected months of the schedule
-* Terminal-based visualization of loan balance over time
-* Payment breakdown chart showing principal vs interest proportions
-* Modular architecture separating:
+### Core Loan Analysis
 
-  * Mortgage model
-  * Schedule generator
-  * Table renderer
-  * Chart visualizer
+* EMI calculation using standard mortgage formulas
+* Full amortization schedule with principal, interest, and balance tracking
+* Option to display any number of payments or all
+* Yearly repayment summary for long-term insight
+* Loan balance timeline visualization
+* Payment breakdown chart
+
+### Prepayment Simulation
+
+* Extra monthly payment support
+* Lump-sum prepayment at a chosen month
+* Combined prepayment strategies
+* Automatic tenure reduction when loan closes early
+* Prepayment impact summary including:
+
+  * Interest saved
+  * Time saved
+  * New tenure
+
+### Multi-Mode Financial Toolkit
+
+* Single loan deep analysis mode
+* Compare multiple loans side-by-side
+* Credit card / score checker tool integration
+* Clean CLI navigation menu
+
+### Architecture & Design
+
+* Modular codebase with separate financial components
+* Dataclass-based mortgage model
+* Clear separation between:
+
+  * Calculation logic
+  * Display logic
+  * Visualization
   * CLI controller
-* Handles zero-interest loans correctly
-* Clean CLI interaction with input validation
 
 ---
 
@@ -42,8 +63,8 @@ Follow these steps to run the project locally.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/mortgage-calculator-cli.git
-cd mortgage-calculator-cli
+git clone https://github.com/your-username/loan-analysis-cli.git
+cd loan-analysis-cli
 ```
 
 ### 2. Ensure Python is installed
@@ -66,49 +87,64 @@ No external libraries are required.
 
 ## Usage
 
-After launching the program:
-
-### 1. Enter loan details
+After launching the program, choose a mode:
 
 ```
-Loan Amount:
-Annual Interest Rate (%):
-Years:
+1 -> Single Loan Analysis
+2 -> Compare Multiple Loans
+3 -> Credit Card and Score Checker
 ```
 
-### 2. (If enabled in your version) provide repayment strategy
+---
+
+### Single Loan Analysis
+
+Enter:
 
 ```
-Extra monthly payment:
-Lump-sum payment amount:
-Lump-sum payment month:
+Loan Amount
+Annual Interest Rate (%)
+Years
 ```
 
-These values allow simulation of early repayment scenarios.
+Then optionally choose prepayment strategy:
 
-### 3. Program output
+```
+1 -> No prepayments
+2 -> Extra monthly payment
+3 -> Lump sum payment
+4 -> Both
+```
 
-The application will display:
+The program outputs:
 
-* Monthly payment amount
-* Total number of payments
-* Total interest paid
+* Monthly payment
+* Total months to repay
+* Total interest
 * Amortization schedule
-* Loan balance timeline chart
+* Yearly repayment summary
+* Prepayment savings report
+* Balance timeline chart
 * Payment breakdown chart
 
-### 4. Example flow
+---
 
-```
-Loan Amount: 500000
-Annual Interest Rate (%): 7.5
-Years: 20
-Extra monthly payment: 2000
-Lump-sum payment: 50000
-Lump-sum month: 24
-```
+### Loan Comparison Mode
 
-The program recalculates the schedule and shows how the loan closes earlier.
+Enter details for multiple loans.
+
+The program compares:
+
+* EMI values
+* Tenure
+* Total interest
+* Overall repayment cost
+
+---
+
+### Credit Tool Mode
+
+Launches the integrated credit utility module for credit-related checks.
 
 ---
 
@@ -119,13 +155,16 @@ Technologies used in this project:
 * Python 3
 * Standard library only
 * Dataclasses for financial modeling
-* Modular design:
+* Modular architecture including:
 
   * Mortgage model module
-  * Amortization generator module
-  * Table formatting module
-  * Chart rendering module
-  * CLI controller module
+  * Amortization engine
+  * Schedule table renderer
+  * Chart visualization module
+  * Yearly summary generator
+  * Loan comparison module
+  * Credit analysis module
+  * CLI controller
 
 ---
 
@@ -141,12 +180,13 @@ python main.py
 
 Then verify:
 
-* EMI calculation matches expected values
-* Extra monthly payments reduce balance faster
-* Lump-sum payments shorten the loan term
-* Schedule stops when balance reaches zero
-* Interest totals adjust correctly
+* EMI values are correct
+* Prepayments reduce tenure and interest
+* Lump-sum logic applies at the correct month
+* Yearly summary totals match schedule values
+* Comparison mode prints correct results
 * Charts render proportionally
+* CLI navigation flows correctly
 
 ---
 
@@ -161,7 +201,7 @@ If you'd like to improve this project:
 3. Commit your changes
 4. Open a pull request
 
-For major feature changes, please open an issue first to discuss the proposal.
+For major changes, please open an issue first to discuss the proposal.
 
 ---
 
