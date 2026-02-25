@@ -2,6 +2,7 @@ from mortgage import Mortgage
 from amortization import generate_schedule
 from table import print_schedule
 from charts import plot_balance, plot_payment_breakdown
+from yearly_summary import generate_yearly_summary, print_yearly_summary
 
 
 def get_float(prompt):
@@ -13,27 +14,21 @@ def get_float(prompt):
 
 
 def choose_display_count(total):
-    print("\nShow how many months of payments you want to see?")
-    print("1 -> First 3")
-    print("2 -> First 5")
-    print("3 -> First 10")
-    print("4 -> All")
-    print("Or type any number (e.g., 12)")
+    while True:
+        choice = input(
+            "\nHow many payments do you want to see?\n"
+            "Type a number (e.g., 5, 10) or ALL:"
+        ).strip().lower()
 
-    choice = input("Choice: ").strip()
-
-    if choice .isdigit():
-        n = int(choice)
-        return min(n, total)
-
-    mapping = {
-        "1": 3,
-        "2": 5,
-        "3": 10,
-        "4": total
-    }
-
-    return mapping.get(choice, total)
+        if choice == "all":
+            return total
+        
+        if choice.isdigit():
+            n = int(choice)
+            if n > 0:
+                return min(n, total)
+        
+        print("Invalid input. Enter a number or ALL")
 
 def get_prepayment_inputs():
     print("\nDo you want to add prepayments?")
@@ -123,19 +118,29 @@ def main():
 ╚██████╗██║  ██║███████╗╚██████╗╚██████╔╝███████╗██║  ██║   ██║   ╚██████╔╝██║  ██║
  ╚═════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝ 
 """)
-    
-    print("\n1 -> Single Loan Analysis")
-    print("2 -> Compare Multiple Loans")
+    while True:
+        print("\n1 -> Single Loan Analysis")
+        print("2 -> Compare Multiple Loans")
+        print("3 -> Credit Card and Score Checker")
 
-    mode = input("Choose Mode: ").strip()
+        mode = input("Choose Mode (1-3): ").strip()
 
-    if mode == "2":
-        from comparison import compare_loan, print_comparison
+        if mode == "1":
+            break
+        elif mode == "2":
+            from comparison import compare_loan, print_comparison
 
-        loans = get_loan_for_comparison()
-        results = compare_loan(loans)
-        print_comparison(results)
-        return
+            loans = get_loan_for_comparison()
+            results = compare_loan(loans)
+            print_comparison(results)
+            return
+        elif mode == "3":
+            from credit_tool import run_credit_tool
+            run_credit_tool()
+            return
+        
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3")
     
     p = get_float("Loan Amount: ")
     r = get_float("Annual Interest Rate (%): ")
@@ -162,6 +167,9 @@ def main():
     limit = choose_display_count(len(schedule))
     print_schedule(schedule, limit)
 
+    yearly = generate_yearly_summary(schedule)
+    print_yearly_summary(yearly)
+
     print_prepayment_summary(
         normal_schedule,
         schedule,
@@ -176,3 +184,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# pay off date estimate

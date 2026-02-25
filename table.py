@@ -5,11 +5,11 @@ def print_schedule(schedule, limit=None):
     print("\n=== AMORTIZATION SCHEDULE ===")
     print("-" * 78)
     print(
-        f"{'Pmt#':<6}"
-        f"{'Payment':>12}"
-        f"{'Principal':>12}"
-        f"{'Interest':12}"
-        f"{'Balance':>14}"
+        f"{'Pmt#':<6} "
+        f"{'Payment':>12} "
+        f"{'Principal':>12}  "
+        f"{'Interest':12} "
+        f"{'Balance':>14} "
           )
     print("-" * 78)
     
@@ -25,4 +25,4 @@ def print_schedule(schedule, limit=None):
     print("-" * 78)
 
     if limit < len(schedule):
-        print(f"Showing {limit} of {len(schedule)} payments")
+        print(f"Showing {limit} of {len(schedule)} months")

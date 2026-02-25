@@ -33,13 +33,13 @@ def print_comparison(results):
     print("-" * 90)
 
     print(
-        f"{'Loan':<6}"
-        f"{'Principal':>12}"
-        f"{'Rate':>8}"
-        f"{'Years':>8}"
-        f"{'EMI':>12}"
-        f"{'Interest':14}"
-        f"{'Total Paid':>14}"
+        f"{'Loan':<6} "
+        f"{'Principal':>12} "
+        f"{'Rate':>8} "
+        f"{'Years':>8} "
+        f"{'EMI':>12} "
+        f"{'Interest':14} "
+        f"{'Total Paid':>14} "
     )
 
     print("-" * 90)
@@ -56,5 +56,5 @@ def print_comparison(results):
         )
     print("-" * 90)
 
-    best = min(results, key=lambda x: x["interest"])
-    print(f"\nBest option: Loan {best['id']} (lowest total interest)")
+    best = min(results, key=lambda x: x["interest"] / x["principal"])
+    print(f"\nBest option: Loan {best['id']} (lowest interest ratio)")
